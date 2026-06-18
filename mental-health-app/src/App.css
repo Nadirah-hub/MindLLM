@@ -1,0 +1,678 @@
+/* ---- Auth: before login = short, formal, access-restricted ---- */
+.auth-wrap {
+  min-height: 100vh;
+  background: linear-gradient(165deg, #0a0e2a 0%, #1a1f4a 40%, #0d1630 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(12, 18, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.auth-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #e8e8f0;
+  text-align: center;
+}
+
+.auth-subtitle {
+  margin: 0 0 1.25rem;
+  font-size: 0.95rem;
+  color: #a0a0b8;
+  text-align: center;
+}
+
+.auth-success {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #80d080;
+  text-align: center;
+}
+
+.auth-error {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #f0a0a0;
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.auth-label {
+  font-size: 0.85rem;
+  color: #b0b0c8;
+}
+
+.auth-input {
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  color: #e8e8f0;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+}
+
+.auth-input::placeholder {
+  color: #707090;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: rgba(120, 180, 255, 0.5);
+}
+
+/* Password field with visibility toggle */
+.auth-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-with-toggle {
+  padding-right: 2.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.auth-password-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.35rem;
+  background: none;
+  border: none;
+  color: #a0a0b8;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-password-toggle:hover {
+  color: #e8e8f0;
+}
+
+.auth-toggle-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  pointer-events: none;
+}
+
+.auth-button {
+  margin-top: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a0e2a;
+  background: linear-gradient(135deg, #70b0ff 0%, #90c0ff 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.auth-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #80b8ff 0%, #a0d0ff 100%);
+}
+
+.auth-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-link {
+  margin-top: 1rem;
+  padding: 0;
+  font-size: 0.9rem;
+  color: #80b0e0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* ---- Base & layout ---- */
+.app-wrap {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.above-app {
+  min-height: 100vh;
+  background: linear-gradient(165deg, #0a0e2a 0%, #1a1f4a 40%, #0d1630 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 3rem;
+  box-sizing: border-box;
+}
+
+/* Mood-based themes */
+.app-mood-neutral .above-app {
+  background: linear-gradient(165deg, #1e293b 0%, #334155 100%); /* slate grey */
+}
+
+.app-mood-very_sad .above-app {
+  background: linear-gradient(165deg, #020617 0%, #0f172a 100%); /* dark blue/navy */
+}
+
+/* anxious mood – soft purple / lavender */
+.app-mood-anxious .above-app {
+  background: linear-gradient(165deg, #2e1065 0%, #4c1d95 100%);
+}
+
+/* stressed - warm orange / amber */
+.app-mood-stressed .above-app {
+  background: linear-gradient(165deg, #78350f 0%, #b45309 100%);
+}
+
+/* calm - teal / light green */
+.app-mood-calm .above-app {
+  background: linear-gradient(165deg, #042f2e 0%, #115e59 100%);
+}
+
+/* happy - sky blue / light yellow */
+.app-mood-happy .above-app {
+  background: linear-gradient(165deg, #0c4a6e 0%, #0ea5e9 100%);
+}
+
+/* hopeful - green / cyan */
+.app-mood-hopeful .above-app {
+  background: linear-gradient(165deg, #064e3b 0%, #10b981 100%);
+}
+
+/* Card Styles */
+.app-mood-very_sad .App {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(30, 41, 59, 0.5);
+}
+
+.app-mood-anxious .App {
+  background: rgba(46, 16, 101, 0.8);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.app-mood-stressed .App {
+  background: rgba(67, 20, 7, 0.8);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+.app-mood-calm .App {
+  background: rgba(4, 47, 46, 0.8);
+  border-color: rgba(20, 184, 166, 0.3);
+}
+
+.app-mood-happy .App {
+  background: rgba(12, 74, 110, 0.8);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.app-mood-hopeful .App {
+  background: rgba(6, 78, 59, 0.8);
+  border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* brightness levels: as mood persists, slightly brighten */
+.app-mood-level-1 .above-app,
+.app-mood-level-1 .App {
+  filter: brightness(1);
+}
+
+.app-mood-level-2 .above-app,
+.app-mood-level-2 .App {
+  filter: brightness(1.06);
+}
+
+.app-mood-level-3 .above-app,
+.app-mood-level-3 .App {
+  filter: brightness(1.12);
+}
+
+.below-app {
+  flex: 1;
+}
+
+/* ---- Header ---- */
+.app-header {
+  position: relative;
+  text-align: center;
+  margin-bottom: 2rem;
+  max-width: 640px;
+}
+
+.logout-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  color: #a0b0d0;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  color: #c0d0f0;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.large-text {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #f0f4fc;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: clamp(0.9rem, 2vw, 1.05rem);
+  color: #9ca8c4;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ---- Main card ---- */
+.App {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.controls-top {
+  margin-bottom: 0.5rem;
+}
+
+.controls-input {
+  margin-top: 1rem;
+}
+
+/* ---- Labels & inputs ---- */
+.small-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #b8c4e0;
+  margin-top: 0.5rem;
+}
+
+.small-text:first-child {
+  margin-top: 0;
+}
+
+label[for="userInput"] {
+  margin-top: 1rem;
+}
+
+.small-input,
+.large-input {
+  width: 100%;
+  max-width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 171, 240, 0.35);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8ecf4;
+  font-size: 1rem;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.small-input:focus,
+.large-input:focus {
+  outline: none;
+  border-color: #00abf0;
+  box-shadow: 0 0 0 3px rgba(0, 171, 240, 0.2);
+}
+
+.large-input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.large-input::placeholder {
+  color: #6b7a9e;
+}
+
+/* ---- Button ---- */
+.large-button {
+  width: 100%;
+  padding: 14px 20px;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0a0e2a;
+  background: linear-gradient(135deg, #00abf0 0%, #0088c7 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+}
+
+.large-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 171, 240, 0.4);
+}
+
+.large-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.large-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ---- Messages ---- */
+.message {
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.message-error {
+  background: rgba(220, 80, 80, 0.15);
+  border: 1px solid rgba(220, 80, 80, 0.4);
+  color: #f0a0a0;
+}
+
+/* ---- Safety escalation banner ---- */
+.safety-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 180, 80, 0.12) 0%, rgba(255, 120, 80, 0.08) 100%);
+  border: 1px solid rgba(255, 180, 80, 0.35);
+}
+
+.safety-banner-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.safety-banner-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffd4a0;
+}
+
+.safety-banner-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #e8d4b8;
+  line-height: 1.5;
+}
+
+/* Pattern fingerprint: gentle “we notice you” insight (not crisis) */
+.pattern-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(120, 200, 255, 0.1) 0%, rgba(180, 140, 255, 0.08) 100%);
+  border: 1px solid rgba(150, 200, 255, 0.3);
+}
+
+.pattern-banner-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pattern-banner-text {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #c8e0f0;
+  line-height: 1.5;
+}
+
+/* ---- Chat window (WhatsApp-style) ---- */
+.chat-window {
+  padding: 1.1rem;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chat-row {
+  display: flex;
+}
+
+.chat-row-user {
+  justify-content: flex-end;
+}
+
+.chat-row-assistant {
+  justify-content: flex-start;
+}
+
+.chat-bubble {
+  max-width: 80%;
+  padding: 0.6rem 0.8rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* user bubble – stays blue so user is consistent */
+.chat-bubble-user {
+  background: linear-gradient(135deg, #00abf0 0%, #0088c7 100%);
+  color: #06101f;
+  border-bottom-right-radius: 4px;
+}
+
+/* assistant bubble – base */
+.chat-bubble-assistant {
+  background: rgba(10, 18, 40, 0.9);
+  color: #dde7ff;
+  border-bottom-left-radius: 4px;
+  border: 1px solid rgba(0, 171, 240, 0.25);
+}
+
+/* assistant bubble colors by mood */
+.app-mood-positive .chat-bubble-assistant {
+  background: linear-gradient(135deg, rgba(255, 190, 230, 0.25), rgba(130, 190, 255, 0.22));
+  color: #ffe9f7;
+  border-color: rgba(255, 180, 230, 0.6);
+}
+
+.app-mood-anxious .chat-bubble-assistant {
+  background: linear-gradient(135deg, rgba(120, 220, 255, 0.22), rgba(40, 160, 190, 0.8));
+  color: #e5fbff;
+  border-color: rgba(130, 230, 255, 0.85);
+}
+
+.app-mood-low .chat-bubble-assistant {
+  background: rgba(18, 26, 60, 0.95);
+  color: #dde7ff;
+  border-color: rgba(140, 170, 230, 0.6);
+}
+
+.app-mood-angry .chat-bubble-assistant {
+  background: linear-gradient(135deg, rgba(255, 110, 110, 0.3), rgba(160, 60, 80, 0.6));
+  color: #ffe6ea;
+  border-color: rgba(255, 130, 130, 0.8);
+}
+
+.chat-bubble-safety {
+  box-shadow: 0 0 0 2px rgba(255, 180, 80, 0.55);
+}
+
+.chat-bubble p {
+  margin: 0;
+}
+
+.chat-bubble p + p {
+  margin-top: 0.25rem;
+}
+
+/* ---- Helplines ---- */
+.helplines-section {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: rgba(40, 60, 100, 0.25);
+  border: 1px solid rgba(100, 140, 220, 0.2);
+}
+
+.helplines-section.helplines-always {
+  background: rgba(30, 50, 90, 0.2);
+}
+
+.helplines-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #a8c4f0;
+}
+
+.helplines-intro {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  color: #9ca8c4;
+  line-height: 1.4;
+}
+
+.helplines-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.helpline-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  gap: 0.25rem 1rem;
+  align-items: start;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.helpline-region {
+  grid-column: 1;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7a8ab0;
+}
+
+.helpline-name {
+  grid-column: 2;
+  font-size: 0.95rem;
+  color: #e0e8f8;
+}
+
+.helpline-number {
+  grid-column: 1 / -1;
+  font-size: 1rem;
+  color: #b8c4e0;
+}
+
+.helpline-link {
+  color: #00abf0;
+  text-decoration: none;
+}
+
+.helpline-link:hover {
+  text-decoration: underline;
+}
+
+.helpline-url {
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ---- Resources toggle ---- */
+.resources-toggle {
+  margin-top: 0.25rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #7a9ed0;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  text-decoration: underline;
+}
+
+.link-button:hover {
+  color: #00abf0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 640px) {
+  .above-app {
+    padding: 1.25rem 0.75rem 2rem;
+  }
+
+  .App {
+    padding: 1.25rem;
+  }
+
+  .helpline-item {
+    grid-template-columns: 1fr;
+  }
+
+  .helpline-name {
+    grid-column: 1;
+  }
+}

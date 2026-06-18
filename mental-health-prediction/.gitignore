@@ -1,0 +1,6 @@
+node_modules/
+user_profiles/
+users.json
+mentalapi.env
+.env
+*.env
